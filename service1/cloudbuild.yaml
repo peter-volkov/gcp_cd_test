@@ -3,14 +3,14 @@ steps:
     entrypoint: ls
     args:
 #    - ls
-    - --lah
+    - -lah
     dir: $_PROJECT_DIRECTORY
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: ls
     args:
 #    - ls
-    - --lah
+    - -lah
     - service1
     dir: $_PROJECT_DIRECTORY
 
