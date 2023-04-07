@@ -1,0 +1,16 @@
+steps:
+  # Kaniko is (docker build + docker push) with global docker layer cache
+  # https://cloud.google.com/build/docs/optimize-builds/kaniko-cache#kaniko-build
+  # default cache TTL is 2 weeks
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    dir: $_PROJECT_DIRECTORY
+    args:
+    - --destination=us-central1-docker.pkg.dev/$PROJECT_ID/main/$_SERVICE_NAME:$SHORT_SHA
+    - --dockerfile=$_SERVICE_NAME/Dockerfile
+    - --cache=true
+    - --context=dir://. # for some reason it does not work without this in Cloud Build trigger
+
+substitutions:
+  _SERVICE_NAME: "service1"
+  _PROJECT_DIRECTORY: "."
+  _REGION: "us-central1"
